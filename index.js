@@ -1,12 +1,12 @@
 const inquirer = require("inquirer"); //this and jest alone, took nearly 15 minutes to push to git.
 const fs = require("fs");
-
-
-const Engineer = something;
-const Intern = something;
-const Manager = something;
-
-const memberdata = [];
+const reqEmployee = require("./lib/employee");
+const reqManager = require("./lib/manager");
+const reqEngineer = require("./lib/engineer");
+const reqIntern = require("./lib/intern");
+let Engineers = [];
+let Interns = [];
+let Managers = [];
 
 const newEmployeeQuestions = [
     {
@@ -26,25 +26,134 @@ const managerQuestions = [
     {
         type: "input",
         message: "Please enter Manager's name",
-        name:"name"
+        name:"name",
         
     },
     {
         type: "input",
         message: "Please enter Manager's id",
-        name:"id"
+        name:"id",
         
     },    
     {
         type: "input",
         message: "Please enter Manager's email",
-        name:"email"
+        name:"email",
         
     },    
     {
         type: "input",
         message: "Please enter Manager's phone number",
-        name:"phonenumber"
+        name:"phonenumber",
         
     },
 ]
+
+const engineerquestion = [
+    {
+        type: "input",
+        message: "Please enter Engineer's name.",
+        name: "name",
+    },
+    {
+        type:"input",
+        message: "Enter Engineer's ID",
+        name: "id",
+    },
+    {
+        type: "input",
+        message: "Please enter Engineer's email.",
+        name: "email",
+    },
+    {
+        type: "input",
+        message:"Please enter Engineer's GitHub",
+        name:"github",
+    }
+]
+
+const interquestion = [
+    {
+        type: "input",
+        message: "Please enter Intern's name.",
+        name: "name",
+    },
+    {
+        type: "input",
+        message: "Please enter Intern's id",
+        name: "id",
+    },
+    {
+        type: "input",
+        message: "Please enter Intern's email.",
+        name: "email",
+    },
+    {
+        type: "input",
+        message: "Please enter Intern's school.",
+        name: "school",
+    }
+]
+
+function initManager(){
+    inquirer.prompt(managerQuestions)
+    .then((managerQuestions)=>{
+        Managers.push(new Manager(managerQuestions.name, managerQuestions.id, managerQuestions.email, managerQuestions.phonenumber));
+        addNewMem();
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}
+
+function addNewMem(){
+    inquirer.prompt(newEmployeeQuestions)
+    .then((newEmployeeAnswers)=>{
+       if(newEmployeeAnswers.newEmployee){
+        switch(newEmployeeAnswers.role){
+            case "Engineer":
+            addEngineer()
+            break;
+
+            case "Intern":
+                addIntern();
+                break;
+        }
+            
+       }
+       else{
+        build();
+       }
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}
+
+function addEngineer(){
+    inquirer.prompt(engineerquestion)
+    .then((engineerquestion)=>{
+        Engineers.push(new Engineer(engineerquestion.name, engineerquestion.id, engineerquestion.email, engineerquestion.github));
+        addNewMem();
+})
+.catch((err) => {
+    console.log(err)
+});
+};
+
+
+function addIntern(){
+    inquirer.prompt(interquestion)
+    .then((interquestion) => {
+        Interns.push(new Intern(interquestion.name, interquestion.id, interquestion.email, interquestion.school))
+        addNewMem();
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+
+}
+
+
+
+initManager();
