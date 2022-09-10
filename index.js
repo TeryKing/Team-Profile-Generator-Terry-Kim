@@ -10,9 +10,10 @@ let Managers = [];
 
 const newEmployeeQuestions = [
     {
-        type: "Confirm",
-        message: "Would you like to add a employee?",
+        type: "confirm",
+        message: "Would you like to add a new employee?",
         name:"newEmployee",
+
     },
     {
         type: "list",
@@ -98,7 +99,7 @@ const interquestion = [
 function initManager(){
     inquirer.prompt(managerQuestions)
     .then((managerQuestions)=>{
-        Managers.push(new Manager(managerQuestions.name, managerQuestions.id, managerQuestions.email, managerQuestions.phonenumber));
+        Managers.push(new reqManager(managerQuestions.name, managerQuestions.id, managerQuestions.email, managerQuestions.phonenumber));
         addNewMem();
     })
     .catch((err) => {
@@ -119,7 +120,6 @@ function addNewMem(){
                 addIntern();
                 break;
         }
-            
        }
        else{
         build();
@@ -133,7 +133,7 @@ function addNewMem(){
 function addEngineer(){
     inquirer.prompt(engineerquestion)
     .then((engineerquestion)=>{
-        Engineers.push(new Engineer(engineerquestion.name, engineerquestion.id, engineerquestion.email, engineerquestion.github));
+        Engineers.push(new reqEngineer(engineerquestion.name, engineerquestion.id, engineerquestion.email, engineerquestion.github));
         addNewMem();
 })
 .catch((err) => {
@@ -145,7 +145,7 @@ function addEngineer(){
 function addIntern(){
     inquirer.prompt(interquestion)
     .then((interquestion) => {
-        Interns.push(new Intern(interquestion.name, interquestion.id, interquestion.email, interquestion.school))
+        Interns.push(new reqIntern(interquestion.name, interquestion.id, interquestion.email, interquestion.school))
         addNewMem();
     })
     .catch((err) => {
@@ -154,6 +154,9 @@ function addIntern(){
 
 }
 
-
-
 initManager();
+
+function build(){
+    fs.writeFileSync("index.html", gt(Managers,Engineers,Interns));
+    console.log("Success!")
+}
