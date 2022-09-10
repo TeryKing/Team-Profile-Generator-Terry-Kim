@@ -4,6 +4,7 @@ const reqEmployee = require("./lib/employee");
 const reqManager = require("./lib/manager");
 const reqEngineer = require("./lib/engineer");
 const reqIntern = require("./lib/intern");
+const reqGenerate = require("./dist/generate")
 let Engineers = [];
 let Interns = [];
 let Managers = [];
@@ -157,6 +158,6 @@ function addIntern(){
 initManager();
 
 function build(){
-    fs.writeFileSync("index.html", gt(Managers,Engineers,Interns));
+    fs.writeFileSync("index.html", reqGenerate(Managers,Engineers,Interns));
     console.log("Success!")
 }
