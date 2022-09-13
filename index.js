@@ -20,7 +20,7 @@ const newEmployeeQuestions = [
         type: "list",
         message: "What role would you like to assign this new employee",
         name:"role",
-        choices: ["Engineer","Intern","None"]
+        choices: ["Engineer","Intern"]
     },
 ]
 
@@ -158,6 +158,6 @@ function addIntern(){
 initManager();
 
 function build(){
-    fs.writeFileSync("index.html", reqGenerate(Managers,Engineers,Interns));
+    fs.writeFileSync("./dist/index.html", reqGenerate(Managers,Engineers,Interns));
     console.log("Success!")
 }
