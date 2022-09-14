@@ -1,9 +1,10 @@
+//const for all team members
 const Employee = require("../lib/employee")
 const Manager = require("../lib/manager")
 const Engineer = require("../lib/engineer")
 const Intern = require("../lib/intern")
 
-// function to loop through engineers and create cards for each
+// function to loop through each engineer chosen and creates a basic bootstrap html
 function loopEngineer(Engineers) {
 
     let engineerCards = Engineers.map(engineer => {
@@ -29,7 +30,7 @@ function loopEngineer(Engineers) {
 
 };
 
-// function to loop through interns and create cards for each
+// function to loop through each intern chosen, and creates a basic bootstrap html
 function loopIntern(Interns) {
 
     let internCards = Interns.map(intern =>{
@@ -53,7 +54,7 @@ function loopIntern(Interns) {
     return internCards.join('');
 };
 
-// function to generate team html page
+// function to generate team html page using bootstrap
 function generate(Managers, Engineers, Interns) {
 
     return `

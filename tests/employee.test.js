@@ -1,5 +1,5 @@
 const Employee = require("../lib/employee")
-
+//testing for any new employee for email, id, name, and role
 describe("getName", () => {
     it("should get the name of the Employee", () => {
         const employee = new Employee("Terry", 1, "tery_x3@hotmail.com");

@@ -1,4 +1,4 @@
-const inquirer = require("inquirer"); //this and jest alone, took nearly 15 minutes to push to git.
+const inquirer = require("inquirer"); //this and jest alone, took nearly 15 minutes to push to git. all const that was planned on using for the node
 const fs = require("fs");
 const reqEmployee = require("./lib/employee");
 const reqManager = require("./lib/manager");
@@ -9,6 +9,7 @@ let Engineers = [];
 let Interns = [];
 let Managers = [];
 
+//questions for node 
 const newEmployeeQuestions = [
     {
         type: "confirm",
@@ -97,6 +98,7 @@ const interquestion = [
     }
 ]
 
+//function to initialize the node which starts off with manager.
 function initManager(){
     inquirer.prompt(managerQuestions)
     .then((managerQuestions)=>{
@@ -107,7 +109,7 @@ function initManager(){
         console.log(err);
     })
 }
-
+//function after adding the manager, function to add member
 function addNewMem(){
     inquirer.prompt(newEmployeeQuestions)
     .then((newEmployeeAnswers)=>{
@@ -130,7 +132,7 @@ function addNewMem(){
         console.log(err);
     })
 }
-
+//adding engineer from choice prompt
 function addEngineer(){
     inquirer.prompt(engineerquestion)
     .then((engineerquestion)=>{
@@ -142,7 +144,7 @@ function addEngineer(){
 });
 };
 
-
+//adding intern from choice prompt
 function addIntern(){
     inquirer.prompt(interquestion)
     .then((interquestion) => {
@@ -154,9 +156,9 @@ function addIntern(){
     })
 
 }
-
+//starting the node function
 initManager();
-
+//building the html.
 function build(){
     fs.writeFileSync("./dist/index.html", reqGenerate(Managers,Engineers,Interns));
     console.log("Success!")

@@ -1,5 +1,5 @@
 const Intern = require('../lib/intern')
-
+//testing to check interns for school and role
 describe("getSchool", () => {
     it("should get the id number of the intern", () =>{
         const intern = new Intern("Terry", 1, "tery_x3@hotmail.com", "University of Houston");
