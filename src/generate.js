@@ -4,56 +4,6 @@ const Manager = require("../lib/manager")
 const Engineer = require("../lib/engineer")
 const Intern = require("../lib/intern")
 
-// function to loop through each engineer chosen and creates a basic bootstrap html
-function loopEngineer(Engineers) {
-
-    let engineerCards = Engineers.map(engineer => {
-        return              `
-                    <section class="col">
-                        <div class="card shadow rounded">
-                            <div class="card-header">
-                                ${engineer.getName()} <br>
-                                ${engineer.getRole()}
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush border">
-                                    <li class="list-group-item">Company ID: ${engineer.getId()}</li>
-                                    <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
-                                    <li class="list-group-item"> <a href="https://github.com/${engineer.getGithub()}" target="_blank">${engineer.getGithub()}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </section>`   
-    })
-
-    return engineerCards.join('');
-
-};
-
-// function to loop through each intern chosen, and creates a basic bootstrap html
-function loopIntern(Interns) {
-
-    let internCards = Interns.map(intern =>{
-        return              ` 
-                    <section class="col">
-                        <div class="card shadow rounded">
-                            <div class="card-header">
-                                ${intern.getName()} <br>
-                                ${intern.getRole()}
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush border">
-                                    <li class="list-group-item">Company ID: ${intern.getId()}</li>
-                                    <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
-                                    <li class="list-group-item">${intern.getSchool()}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </section>`
-    })
-    return internCards.join('');
-};
-
 // function to generate team html page using bootstrap
 function generate(Managers, Engineers, Interns) {
 
@@ -105,6 +55,58 @@ function generate(Managers, Engineers, Interns) {
     </html>
     `
 };
+// function to loop through each engineer chosen and creates a basic bootstrap html
+
+function loopEngineer(Engineers) {
+
+    let engineerCards = Engineers.map(engineer => {
+        return `
+                    <section class="col">
+                        <div class="card shadow rounded">
+                            <div class="card-header">
+                                ${engineer.getName()} <br>
+                                ${engineer.getRole()}
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush border">
+                                    <li class="list-group-item">Company ID: ${engineer.getId()}</li>
+                                    <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+                                    <li class="list-group-item"> <a href="https://github.com/${engineer.getGithub()}" target="_blank">${engineer.getGithub()}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>`   
+    })
+
+    return engineerCards.join('');
+
+};
+
+// function to loop through each intern chosen, and creates a basic bootstrap html same as engineer
+function loopIntern(Interns) {
+
+    let internCards = Interns.map(intern =>{
+        return ` 
+                    <section class="col">
+                        <div class="card shadow rounded">
+                            <div class="card-header">
+                                ${intern.getName()} <br>
+                                ${intern.getRole()}
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush border">
+                                    <li class="list-group-item">Company ID: ${intern.getId()}</li>
+                                    <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
+                                    <li class="list-group-item">${intern.getSchool()}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>`
+    })
+    return internCards.join('');
+};
+
+
 
 
 module.exports = generate;
